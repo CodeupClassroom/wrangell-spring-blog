@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <th:block th:include="fragments/head :: header('Users Page')"></th:block>
 </head>
 <body>
+
+<div th:replace="fragments/navbar :: myNav"></div>
 
 <div th:if="${role == 'admin'}">
     <h2>This is the admin area</h2>
@@ -14,7 +14,9 @@
     </ul>
 </div>
 
-<h2 th:if="${role != 'admin'}">This is not the admin area</h2>
+<h2 th:if="${role != 'admin'}">You are not allowed to be here</h2>
+
+
 
 </body>
 </html>
