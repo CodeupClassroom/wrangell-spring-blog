@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/head :: header('Users Page')"></th:block>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: myNav"></div>
+
+<div th:if="${role == 'admin'}">
+    <h2>This is the admin area</h2>
+    <ul>
+        <li th:each="user : ${users}" th:text="${user}"></li>
+    </ul>
+</div>
+
+<h2 th:if="${role != 'admin'}">You are not allowed to be here</h2>
+
+
+
+</body>
+</html>
