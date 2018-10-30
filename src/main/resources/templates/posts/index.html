@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: head">
+<head th:replace="fragments/header :: head('List of posts')">
     <meta charset="UTF-8"/>
     <title>Title</title>
 
 </head>
-<body>
-<div th:replace="fragments/header :: header"></div>
+<description>
 <div th:replace="fragments/navbar :: myNav"></div>
 <h1>List of posts</h1>
 
 <div th:each="post : ${posts}">
     <h2 th:text="${post.title}"></h2>
-    <p th:text="${post.body}"></p>
+    <p th:text="${post.description}"></p>
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
-</body>
+</description>
 </html>

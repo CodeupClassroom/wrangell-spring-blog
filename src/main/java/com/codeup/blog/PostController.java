@@ -19,7 +19,7 @@ public class PostController {
         posts.add(new Post("My first post", "It's about my feelings"));
     }
 
-    //    GET	/posts	posts index page
+    //    GET	/ads	ads index page
     @GetMapping("/posts")
     public String postsIndex(Model vModel) {
         posts.add(new Post("A good day", "Yay"));
@@ -28,21 +28,21 @@ public class PostController {
         return "posts/index";
     }
 
-//    GET	/posts/{id}	view an individual post
+//    GET	/ads/{id}	view an individual post
     @GetMapping("/posts/{id}")
     public String individualPost(@PathVariable int id, Model vModel) {
         vModel.addAttribute("post", posts.get(id-1));
         return "posts/show";
     }
 
-//    GET	/posts/create	view the form for creating a post
+//    GET	/ads/create	view the form for creating a post
     @GetMapping("/posts/create")
     @ResponseBody
     public String sendPostForm() {
         return "view the form for creating a post";
     }
 
-//    POST	/posts/create	create a new post
+//    POST	/ads/create	create a new post
     @PostMapping("/posts/create")
     @ResponseBody
     public String createPost() {
