@@ -25,6 +25,10 @@ public class AdsSvc {
         return ad;
     }
 
+    public Ad update(Ad ad){
+        return ads.set((int) ad.getId() - 1, ad);
+    }
+
     public Ad findOne(long id){
        return ads.get( (int) id - 1);
     }

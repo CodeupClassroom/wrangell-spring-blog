@@ -4,10 +4,7 @@ import com.codeup.blog.Ad;
 import com.codeup.blog.services.AdsSvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdController {
@@ -34,16 +31,29 @@ public class AdController {
 
 //    GET	/ads/create	view the form for creating a post
     @GetMapping("/ads/create")
-    @ResponseBody
-    public String sendAdForm() {
-        return "view the form for creating an ad";
+    public String showAdForm(Model vModel) {
+        vModel.addAttribute("ad", new Ad());
+        return "ads/create";
     }
 
 //    POST	/ads/create	create a new post
     @PostMapping("/ads/create")
-    @ResponseBody
-    public String createAd() {
-        return "create a new post";
+    public String createAd(@ModelAttribute Ad ad) {
+        Ad savedAd = adsSvc.save(ad);
+        return "redirect:/ads/" + savedAd.getId();
+    }
+
+    //    GET	/ads/create	view the form for creating a post
+    @GetMapping("/ads/{id}/update")
+    public String showAdUpdateForm(@PathVariable int id, Model vModel) {
+        vModel.addAttribute("ad", adsSvc.findOne(id));
+        return "ads/update";
+    }
+
+    @PostMapping("/ads/{id}/update")
+    public String showAdUpdateForm(@ModelAttribute Ad ad) {
+        Ad updatedAd = adsSvc.update(ad);
+        return "redirect:/ads/" + updatedAd.getId();
     }
 
 }
