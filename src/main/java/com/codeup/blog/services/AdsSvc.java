@@ -34,4 +34,9 @@ public class AdsSvc {
         return adsRepo.findOne(id);
     }
 
+    public List<Ad> search(String term){
+//        return adsRepo.findAllByTitleContainsOrDescriptionContains(term, term);
+        return adsRepo.searchByTitleOrDesc(term);
+    }
+
 }

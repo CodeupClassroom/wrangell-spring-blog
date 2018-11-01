@@ -56,4 +56,10 @@ public class AdController {
         return "redirect:/ads/" + updatedAd.getId();
     }
 
+    @GetMapping("/ads/search/{term}")
+    public String showResults(@PathVariable String term, Model vModel){
+        vModel.addAttribute("ads", adsSvc.search(term));
+        return "ads/index";
+    }
+
 }
