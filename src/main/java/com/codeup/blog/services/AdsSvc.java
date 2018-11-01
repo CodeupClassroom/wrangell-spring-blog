@@ -1,6 +1,7 @@
 package com.codeup.blog.services;
 
 import com.codeup.blog.Ad;
+import com.codeup.blog.AdsRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,35 +9,34 @@ import java.util.List;
 
 @Service
 public class AdsSvc {
-    private List<Ad> ads;
 
-    public AdsSvc(){
-        ads = new ArrayList<>();
-        createAds();
+    private AdsRepo adsRepo;
+
+    public AdsSvc(AdsRepo adsRepo){
+        this.adsRepo = adsRepo;
     }
 
-    public List<Ad> findAll(){
-        return ads;
+    // Def service
+    public Iterable<Ad> all(){
+        // All the ads from DB
+        return adsRepo.findAll();
     }
 
-    public Ad save(Ad ad){
-        ad.setId(ads.size() + 1);
-        ads.add(ad);
-        return ad;
+    public Ad create(Ad ad){
+        return adsRepo.save(ad);
     }
 
     public Ad update(Ad ad){
-        return ads.set((int) ad.getId() - 1, ad);
+        return adsRepo.save(ad);
     }
 
     public Ad findOne(long id){
-       return ads.get( (int) id - 1);
+        return adsRepo.findOne(id);
     }
 
-    private void createAds(){
-        this.save(new Ad("My first ad", "It's about my feelings"));
-        this.save(new Ad("A good day", "Yay"));
-        this.save(new Ad("A bad day", "Meh"));
+    public List<Ad> search(String term){
+//        return adsRepo.findAllByTitleContainsOrDescriptionContains(term, term);
+        return adsRepo.searchByTitleOrDesc(term);
     }
 
 }

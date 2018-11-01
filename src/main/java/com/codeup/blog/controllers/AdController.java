@@ -18,7 +18,7 @@ public class AdController {
     //    GET	/ads	ads index page
     @GetMapping("/ads")
     public String adsIndex(Model vModel) {
-        vModel.addAttribute("ads", adsSvc.findAll());
+        vModel.addAttribute("ads", adsSvc.all());
         return "ads/index";
     }
 
@@ -39,11 +39,11 @@ public class AdController {
 //    POST	/ads/create	create a new post
     @PostMapping("/ads/create")
     public String createAd(@ModelAttribute Ad ad) {
-        Ad savedAd = adsSvc.save(ad);
+        Ad savedAd = adsSvc.create(ad);
         return "redirect:/ads/" + savedAd.getId();
     }
 
-    //    GET	/ads/create	view the form for creating a post
+    //    GET	/ads/update	view the form for updating a post
     @GetMapping("/ads/{id}/update")
     public String showAdUpdateForm(@PathVariable int id, Model vModel) {
         vModel.addAttribute("ad", adsSvc.findOne(id));
@@ -54,6 +54,12 @@ public class AdController {
     public String showAdUpdateForm(@ModelAttribute Ad ad) {
         Ad updatedAd = adsSvc.update(ad);
         return "redirect:/ads/" + updatedAd.getId();
+    }
+
+    @GetMapping("/ads/search/{term}")
+    public String showResults(@PathVariable String term, Model vModel){
+        vModel.addAttribute("ads", adsSvc.search(term));
+        return "ads/index";
     }
 
 }
