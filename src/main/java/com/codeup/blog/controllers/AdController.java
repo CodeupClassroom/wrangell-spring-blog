@@ -43,7 +43,7 @@ public class AdController {
         return "redirect:/ads/" + savedAd.getId();
     }
 
-    //    GET	/ads/create	view the form for creating a post
+    //    GET	/ads/update	view the form for updating a post
     @GetMapping("/ads/{id}/update")
     public String showAdUpdateForm(@PathVariable int id, Model vModel) {
         vModel.addAttribute("ad", adsSvc.findOne(id));
