@@ -18,7 +18,7 @@ public class AdController {
     //    GET	/ads	ads index page
     @GetMapping("/ads")
     public String adsIndex(Model vModel) {
-        vModel.addAttribute("ads", adsSvc.findAll());
+        vModel.addAttribute("ads", adsSvc.all());
         return "ads/index";
     }
 
@@ -39,7 +39,7 @@ public class AdController {
 //    POST	/ads/create	create a new post
     @PostMapping("/ads/create")
     public String createAd(@ModelAttribute Ad ad) {
-        Ad savedAd = adsSvc.save(ad);
+        Ad savedAd = adsSvc.create(ad);
         return "redirect:/ads/" + savedAd.getId();
     }
 
