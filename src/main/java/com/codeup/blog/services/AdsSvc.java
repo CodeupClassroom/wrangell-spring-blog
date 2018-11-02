@@ -1,10 +1,8 @@
 package com.codeup.blog.services;
 
-import com.codeup.blog.Ad;
-import com.codeup.blog.AdsRepo;
+import com.codeup.blog.models.Ad;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

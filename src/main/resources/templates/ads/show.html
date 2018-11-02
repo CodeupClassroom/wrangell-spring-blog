@@ -7,7 +7,18 @@
 
 <div>
     <h2 th:text="${ad.title}"></h2>
+    <img width="300" height="300" th:each="img : ${ad.images}" th:src="${img.path}" alt="" />
     <p th:text="${ad.description}"></p>
+    <p th:text="${'Created by:' + ad.user.username}"></p>
+    <div>
+        <ul>
+            <li th:each="cat : ${ad.categories}">
+                <a th:href="@{/categories/{id}(id=${cat.id}) }" th:text="${cat.name}"></a>
+            </li>
+        </ul>
+    </div>
+
+
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
