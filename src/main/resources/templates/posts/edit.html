@@ -25,7 +25,9 @@
         e.preventDefault();
         let res = confirm("Are you sure?");
         if(res){
-
+            fetch(`/posts/${postId}/delete`, {
+                method: "POST"
+            }).then( res => res.json()).then( res => location.href = "/posts");
         }
     });
 
