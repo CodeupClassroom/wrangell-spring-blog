@@ -25,16 +25,14 @@ public class PostService {
     }
 
     public Iterable<Post> findAll() {
-
         return postRepo.findAll();
     }
 
     public Post findOne(long id) {
-
         return postRepo.findOne(id);
     }
 
-    public Post edit(Post post) {
+    public Post saveOrUpdate(Post post) {
         return postRepo.save(post);
     }
 

@@ -4,10 +4,7 @@ import com.codeup.blog.Post;
 import com.codeup.blog.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +36,35 @@ public class PostController {
 
 //    GET	/ads/create	view the form for creating a post
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String sendPostForm() {
-        return "view the form for creating a post";
+    public String sendPostForm(Model vModel) {
+        vModel.addAttribute("post", new Post());
+        return "posts/create";
     }
 
 //    POST	/ads/create	create a new post
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(@ModelAttribute Post post) {
+        postService.saveOrUpdate(post);
+        return "redirect:/posts/"+ post.getId();
+    }
+
+    //    GET	/ads/create	view the form for creating a post
+    @GetMapping("/posts/{id}/update")
+    public String showUpdateForm(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("post", postService.findOne(id));
+        return "posts/edit";
+    }
+
+    //    POST	/ads/create	create a new post
+    @PostMapping("/posts/{id}/update")
+    public String updatePost(@ModelAttribute Post post) {
+        postService.saveOrUpdate(post);
+        return "redirect:/posts/"+ post.getId();
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public void rmPost(@PathVariable long id) {
+        postService.delete(id);
     }
 
 }
