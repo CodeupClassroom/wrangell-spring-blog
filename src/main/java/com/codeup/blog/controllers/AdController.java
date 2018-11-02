@@ -1,18 +1,25 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Ad;
+import com.codeup.blog.models.Category;
 import com.codeup.blog.models.User;
 import com.codeup.blog.services.AdsSvc;
+import com.codeup.blog.services.CategoriesRepo;
 import com.codeup.blog.services.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class AdController {
 
     private AdsSvc adsSvc;
+
+    @Autowired
+    private CategoriesRepo categoriesRepo;
 
     @Autowired
     private UserRepo userRepo;
@@ -39,14 +46,16 @@ public class AdController {
 //    GET	/ads/create	view the form for creating a post
     @GetMapping("/ads/create")
     public String showAdForm(Model vModel) {
+        vModel.addAttribute("categories", categoriesRepo.findAll());
         vModel.addAttribute("ad", new Ad());
         return "ads/create";
     }
 
 //    POST	/ads/create	create a new post
     @PostMapping("/ads/create")
-    public String createAd(@ModelAttribute Ad ad) {
+    public String createAd(@ModelAttribute Ad ad, @RequestParam(value = "categories" , required = false) List<Category> cats) {
         ad.setUser(userRepo.findOne(1L));
+        ad.setCategories(cats);
         Ad savedAd = adsSvc.create(ad);
         return "redirect:/ads/" + savedAd.getId();
     }
