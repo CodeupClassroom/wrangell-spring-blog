@@ -27,7 +27,7 @@
         if(res){
             fetch(`/posts/${postId}/delete`, {
                 method: "POST"
-            }).then( res => res.json()).then( res => location.href = "/posts");
+            }).then( res => res.json()).then( () => location.href = "/posts");
         }
     });
 
