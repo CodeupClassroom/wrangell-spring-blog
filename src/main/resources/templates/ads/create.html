@@ -11,6 +11,10 @@
     Description:
     <input th:field="*{description}" />
     <br />
+    <th:block th:each="category : ${categories}">
+        <input type="checkbox" name="categories" th:value="${category.id}"/>
+        <label th:text="${category.name}"></label>
+    </th:block>
     <input type="submit" />
 </form>
 
