@@ -1,4 +1,4 @@
-package com.codeup.blog;
+package com.codeup.blog.models;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

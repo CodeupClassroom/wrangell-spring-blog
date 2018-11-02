@@ -1,6 +1,6 @@
 package com.codeup.blog.controllers;
 
-import com.codeup.blog.Ad;
+import com.codeup.blog.models.Ad;
 import com.codeup.blog.services.AdsSvc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
