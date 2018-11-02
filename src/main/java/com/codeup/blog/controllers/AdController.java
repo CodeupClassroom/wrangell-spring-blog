@@ -1,7 +1,10 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.models.Ad;
+import com.codeup.blog.models.User;
 import com.codeup.blog.services.AdsSvc;
+import com.codeup.blog.services.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class AdController {
 
     private AdsSvc adsSvc;
+
+    @Autowired
+    private UserRepo userRepo;
+
     // Dependency injection is happening
     public AdController(AdsSvc adsSvc){
         this.adsSvc = adsSvc;
@@ -39,6 +46,7 @@ public class AdController {
 //    POST	/ads/create	create a new post
     @PostMapping("/ads/create")
     public String createAd(@ModelAttribute Ad ad) {
+        ad.setUser(userRepo.findOne(1L));
         Ad savedAd = adsSvc.create(ad);
         return "redirect:/ads/" + savedAd.getId();
     }
@@ -61,5 +69,10 @@ public class AdController {
         vModel.addAttribute("ads", adsSvc.search(term));
         return "ads/index";
     }
+
+//    @GetMapping("/create/user")
+//    public void createDummyUser(){
+//        userRepo.save(new User("fer","fer@mail.com","pass"));
+//    }
 
 }
