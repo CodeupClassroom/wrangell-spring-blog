@@ -18,21 +18,21 @@ public class ViewsLecture {
         return "hello";
     }
 
-    @GetMapping("/users/{role}")
-    public String showUsers(@PathVariable String role,Model vModel){
-
-        List<String> users = new ArrayList<>();
-        users.add("Fer");
-        users.add("Daniel");
-        users.add("Ryan");
-        users.add("Justin");
-
-        vModel.addAttribute("users", users);
-        vModel.addAttribute("role", role);
-
-        return "users";
-
-    }
+//    @GetMapping("/users/{role}")
+//    public String showUsers(@PathVariable String role,Model vModel){
+//
+//        List<String> users = new ArrayList<>();
+//        users.add("Fer");
+//        users.add("Daniel");
+//        users.add("Ryan");
+//        users.add("Justin");
+//
+//        vModel.addAttribute("users", users);
+//        vModel.addAttribute("role", role);
+//
+//        return "users";
+//
+//    }
 
 
 }
