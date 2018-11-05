@@ -11,15 +11,6 @@ public class PostService {
 
     public PostService(PostRepository postRepo) {
         this.postRepo = postRepo;
-        //        posts = new ArrayList<>();
-//
-//        posts.add(new Post("Halloween", "Michael Myers"));
-//        posts.add(new Post("Friday 13th", "Jason Voorhees"));
-//        posts.add(new Post("Nightmare on Elm Street", "Freddy Krueger"));
-//        posts.add(new Post("IT", "Pennywise"));
-//        posts.add(new Post("Saw", "Jigsaw"));
-//        posts.add(new Post("Charlie Brown", "The Great Pumpkin"));
-//        posts.add(new Post("Poltergeist", "They're heeeeerre"));
     }
 
     public Iterable<Post> findAll() {
