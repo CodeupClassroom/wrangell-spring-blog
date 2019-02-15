@@ -5,6 +5,7 @@ import com.codeup.blog.models.Category;
 import com.codeup.blog.models.User;
 import com.codeup.blog.services.AdsSvc;
 import com.codeup.blog.services.CategoriesRepo;
+import com.codeup.blog.services.EmailService;
 import com.codeup.blog.services.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,9 @@ import java.util.List;
 public class AdController {
 
     private AdsSvc adsSvc;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private CategoriesRepo categoriesRepo;
@@ -60,6 +64,7 @@ public class AdController {
         ad.setUser(userRepo.findOne(logUser.getId()));
         ad.setCategories(cats);
         Ad savedAd = adsSvc.create(ad);
+        emailService.prepareAndSend(savedAd, "Ad created", "Good to go");
         return "redirect:/ads/" + savedAd.getId();
     }
 
